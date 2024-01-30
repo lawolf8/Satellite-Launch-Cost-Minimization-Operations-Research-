@@ -19,7 +19,8 @@ Python 3.11.1
 - National Weather Service API (NWS)
 
 ## How It Works
-1. **Input Gathering**: Collects data on potential launch locations, satellite specifications, and desired launch windows.
+1. **Input Gathering**: Collects data on potential launch locations, satellite specifications, satellite costs, and desired launch windows.
 2. **Weather Data Integration**: Fetches weather forecasts from the National Weather API for considered locations and dates.
 3. **Optimization Algorithm**: Applies Operations Research algorithms to determine the most cost-effective launch day, balancing factors like weather conditions, satellite size, and failure rates.
 4. **Output**: Provides a detailed report on the best day for the satellite launch, including cost analysis and risk assessment.
+5. **User Interface**: Determines the ideal location to commit a LEO launch within 14 days
