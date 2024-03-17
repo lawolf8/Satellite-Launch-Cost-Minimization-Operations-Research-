@@ -5,7 +5,8 @@ This project leverages Operations Research techniques to solve the complex probl
 
 ## Key Features
 - **Data Analysis**: Utilizes GCAT data for comprehensive satellite and launch information.
-- **Weather Integration**: Incorporates data from the National Weather API to factor in historical and forecasted weather conditions.
+- **Weather Integration**: Incorporates data from the National Weather API to factor in historical and forecasted weather conditions. Weather per launch site is determined by the closest area recorded by NWS, this requires the great-circle distance between two points 
+    on the Earth surface of both the areas recorded by NWS and the location of the launch sites.
 - **Cost Optimization**: Focuses on minimizing overall launch costs considering multiple variables at various sites. 
 - **Failure Rate Assessment**: Evaluates the risk associated with satellite launches.
 
@@ -13,6 +14,7 @@ This project leverages Operations Research techniques to solve the complex probl
 Python 3.11.1
 - Gurobipy (Operations Research Solver)
 - Pandas
+- Geopandas
 - Numpy
 - Matplotlib
 - Seaborn
@@ -21,6 +23,6 @@ Python 3.11.1
 ## How It Works
 1. **Input Gathering**: Collects data on potential launch locations, satellite specifications, satellite costs, and desired launch windows.
 2. **Weather Data Integration**: Fetches weather forecasts from the National Weather API for considered locations and dates.
-3. **Optimization Algorithm**: Applies Operations Research algorithms to determine the most cost-effective launch day, balancing factors like weather conditions, satellite size, and failure rates.
-4. **Output**: Provides a detailed report on the best day for the satellite launch, including cost analysis and risk assessment.
-5. **User Interface**: Determines the ideal location to commit a LEO launch within 14 days
+4. **Optimization Algorithm**: Applies Operations Research algorithms to determine the most cost-effective launch day, balancing factors like weather conditions, satellite size, and failure rates.
+5. **Output**: Provides a detailed report on the best day for the satellite launch, including cost analysis and risk assessment.
+6. **User Interface**: Determines the ideal location to commit a LEO launch within 14 days
