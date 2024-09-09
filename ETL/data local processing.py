@@ -1,13 +1,14 @@
 import pandas as pd
 import geopandas as gpd
 import os
+import Optional
 
 class local_data_preprocess:
-    def __init__(self):
+    def __init__(self) -> None:
         self.username = os.getenv("USERNAME", "Default User")
         self.current_path = os.getcwd()
 
-    def gcat(self):
+    def gcat(self) -> Optional[pd.DataFrame]:
         # Adjust paths to move up one directory
         lp_path = os.path.join(self.current_path, '..', 'Data', 'sat data', 'launch.tsv')
         print(lp_path)
@@ -34,13 +35,13 @@ class local_data_preprocess:
         sites_path = os.path.join(self.current_path, '..', 'Data', 'sat data', 'sites.tsv')
         sites = pd.read_table(sites_path, header=0)
         return lp, satcat, auxcat, ftorbit, orgs, sites
-    def ourworld(self):
+    def ourworld(self) -> Optional[pd.DataFrame]:
         # Adjust path to move up one directory
         leocost_path = os.path.join(self.current_path, '..', 'Data', 'sat data', 'cost-space-launches-low-earth-orbit.csv')
         leocost = pd.read_csv(leocost_path, header=0)
         leocost['Year'] = pd.to_datetime(leocost['Year'], format='%Y')
         return leocost
-    def local_nws(self):
+    def local_nws(self) -> Optional[pd.DataFrame]:
         # Adjust path to move up one directory
         nwsdata_path = os.path.join(self.current_path, '..', 'Data', 'sat data', 'z_05mr24.shp')
         nwsdata = gpd.read_file(nwsdata_path)

@@ -69,19 +69,24 @@ class BlueOriginLaunch(LaunchAPI):
             'details': launch.get('details', 'No details available')
         } for launch in data]
 
-def main() -> None:
-    nasa = NasaLaunch()
-    spacex = SpaceXLaunch()
-    ula = UlaLaunch()
-    blue_origin = BlueOriginLaunch()
 
-    # Process each agency
-    agencies = [nasa, spacex, ula, blue_origin]
-    for agency in agencies:
-        try:
-            data = agency.get_upcoming_launches()
-            launches = agency.parse_launches(data)
-            print(f"{agency.__class__.__name__} Launches:", launches)
-        except Exception as e:
-            print(f"Failed to process data for {agency.__class__.__name__}: {str(e)}")
+class data_main:
+    def __init__(self) -> None:
+        pass
+    def main() -> None:
+        nasa = NasaLaunch()
+        spacex = SpaceXLaunch()
+        ula = UlaLaunch()
+        blue_origin = BlueOriginLaunch()
+
+        # Process each agency
+        agencies = [nasa, spacex, ula, blue_origin]
+        for agency in agencies:
+            try:
+                data = agency.get_upcoming_launches()
+                launches = agency.parse_launches(data)
+                print(f"{agency.__class__.__name__} Launches:", launches)
+                return {{}} #Outer Hash map for company, data; inner hashmap for additional data
+            except Exception as e:
+                print(f"Failed to process data for {agency.__class__.__name__}: {str(e)}")
 
