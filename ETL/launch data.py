@@ -1,24 +1,26 @@
 import requests
+import Optional
+import pandas as pd
 
 class LaunchAPI:
     def __init__(self, base_url):
         self.base_url = base_url
 
-    def get_upcoming_launches(self):
+    def get_upcoming_launches(self) -> None:
         """Retrieve upcoming launches from the API."""
         response = requests.get(f"{self.base_url}/upcoming")
         response.raise_for_status()  # Raises an HTTPError for bad responses
         return response.json()
 
-    def parse_launches(self, data):
+    def parse_launches(self, data) -> Optional[pd.DataFrame]:
         """Parse the API data into a more convenient format."""
         raise NotImplementedError("This method should be overridden by subclasses.")
 
 class NasaLaunch(LaunchAPI):
-    def __init__(self):
+    def __init__(self) -> None:
         super().__init__("https://api.nasa.gov/launches")
 
-    def parse_launches(self, data):
+    def parse_launches(self, data) -> Optional[pd.DataFrame]:
         """Parse specific data format from NASA's launch API."""
         return [{
             'name': launch['mission_name'],
@@ -28,10 +30,10 @@ class NasaLaunch(LaunchAPI):
         } for launch in data['launches']]
 
 class SpaceXLaunch(LaunchAPI):
-    def __init__(self):
+    def __init__(self) -> None:
         super().__init__("https://api.spacexdata.com/v4/launches")
 
-    def parse_launches(self, data):
+    def parse_launches(self, data) -> Optional[pd.DataFrame]:
         """Parse specific data format from SpaceX's launch API."""
         return [{
             'name': launch['name'],
@@ -44,7 +46,7 @@ class UlaLaunch(LaunchAPI):
     def __init__(self):
         super().__init__("https://api.ulalaunch.com/v1/launches")
 
-    def parse_launches(self, data):
+    def parse_launches(self, data) -> Optional[pd.DataFrame]:
         """Parse specific data format from ULA's launch API."""
         return [{
             'name': launch['mission'],
@@ -54,10 +56,10 @@ class UlaLaunch(LaunchAPI):
         } for launch in data['results']]
 
 class BlueOriginLaunch(LaunchAPI):
-    def __init__(self):
+    def __init__(self) -> None:
         super().__init__("https://api.blueorigin.com/v1/launches")
 
-    def parse_launches(self, data):
+    def parse_launches(self, data) -> Optional[pd.DataFrame]:
         """Parse specific data format from Blue Origin's launch API."""
         # Assuming structure; adjust according to actual API response
         return [{
@@ -67,7 +69,7 @@ class BlueOriginLaunch(LaunchAPI):
             'details': launch.get('details', 'No details available')
         } for launch in data]
 
-def main():
+def main() -> None:
     nasa = NasaLaunch()
     spacex = SpaceXLaunch()
     ula = UlaLaunch()
